@@ -15,8 +15,15 @@ export class UserService {
 
 // add user
 
+// console.log(user);
+
 public addUser(user:any){
+  console.log(user);
 return this.http.post(`${baseUrl}/user/`, user);
 }
+
+
+
+
 
 }

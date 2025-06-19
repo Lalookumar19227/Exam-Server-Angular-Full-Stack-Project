@@ -3,50 +3,49 @@ import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 
-
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit{
-  constructor( private userService:UserService,private snack:MatSnackBar) {}
+export class SignupComponent implements OnInit {
+  constructor(private userService: UserService, private snack: MatSnackBar) {}
 
-public user = {
-username:'',
-password:'',
-firstName:'',
-lastName:'',
-email:'',
-phone:'',
- };
- 
-  ngOnInit(): void {
-     
-  }
- 
+  public user = {
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+  };
+
+  ngOnInit(): void {}
+
   formSubmit() {
     console.log(this.user);
-     if(this.user.username=='' || this.user.username==null ){
+console.log(this.user.username);
+console.log(this.user.username);
+
+
+    if (this.user.username == '' || this.user.username == null) {
       // alert('User is required !!');
-this.snack.open('Username is required !! ', '',{
-  duration:3000
-}
-);
+      this.snack.open('Username is required !! ', '', {
+        duration: 3000,
+      });
       return;
-     }
+    }
 
+    // adduser: userservice
+    this.userService.addUser(this.user).subscribe(
+      
+      (data: any) => {
+        //success
+        console.log(data);
+        // alert('success');
+        Swal.fire('Successfully done!!', 'user id is' + data.id, 'success');
 
-     // adduser: userservice
-this.userService.addUser(this.user).subscribe(
-  (data:any)=>{
-    //success
-    console.log(data);
-    // alert('success');
-    Swal.fire('Successfully done!!','user id is'  +data.id, 'success');
-
- this.user = {
+        this.user = {
           username: '',
           password: '',
           firstName: '',
@@ -54,16 +53,15 @@ this.userService.addUser(this.user).subscribe(
           email: '',
           phone: '',
         };
- 
-  },
-  (error)=>{
-    //error
-    console.log(error);
-    alert('something went wrong');
-    this.snack.open('Username is required !! ', '',{
-  duration:3000
-});
-  }
-  )
+      },
+      (error) => {
+        //error
+        console.log(error);
+        alert('something went wrong');
+        this.snack.open('Username is required !! ', '', {
+          duration: 3000,
+        });
+      }
+    );
   }
 }
