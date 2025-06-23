@@ -20,10 +20,16 @@
     Register 
   </a>
 
-  
+
+ <!-- <span *ngIf="userRole1 === 'admin'">| Admin Panel</span> -->
+<!-- <span *ngIf="isLoggedIn && currentRoute.includes('/admin')">Admin Panel</span>
+<span *ngIf="isLoggedIn && currentRoute.includes('/user-dashboard')">User Panel</span> -->
+
+ 
 
 
-  <a 
+
+    <a 
   (click)="logout()"
   *ngIf="isLoggedIn"
    
